@@ -39,9 +39,80 @@
 | **Clock Synchronization (Master/Slave)** | **Required** (Roles configured via BSW/register) | **Not Required** (Asynchronous point-to-point) | **Required** (Roles dynamically negotiated during Auto-Negotiation) |
 
 ## Questions
+### Q1: What is the architectural structure of the Ethernet Physical Layer? How do components like MCU, MAC, MII, PHY, and MDI connect?
+
+**Answer:**
+To understand high-speed Ethernet communications, we need to map out the boundary between the host Microcontroller (MCU) and the physical transmission medium. Here is the standard architecture:
+
+```mermaid
+graph TD
+    subgraph ECU ["Host System / ECU"]
+        MCU["Microcontroller (Host CPU)<br/>Application / OS"]
+        MAC["Ethernet MAC<br/>(Media Access Control)"]
+        PHY["Physical Layer Transceiver<br/>(PHY Chip)"]
+        
+        MCU <-->|"MII / xMII"| MAC
+        MAC <-->|"MII / xMII"| PHY
+    end
+
+    MDI["Medium Dependent Interface<br/>(Connector & Magnetics/Hybrid)"]
+    Media["Physical Medium<br/>(UTP / STP Cable)"]
+
+    PHY <-->|"MDI Signal"| MDI
+    MDI <--> Media
+```
+
+#### Key Components & Terminology
+
+*   **MCU (Microcontroller)**: Executes the high-level software stack (e.g., AUTOSAR TCP/IP, SOME/IP).
+*   **MAC (Media Access Control)**: Operates at Layer 2 (Data Link Layer). Handles frame formatting, CRC generation/validation, and MAC addressing.
+*   **MII (Media Independent Interface)**: The standardized interface connecting MAC and PHY. Common variants include RMII, RGMII, and SGMII.
+*   **PHY (Physical Layer Transceiver)**: Operates at Layer 1. Responsible for line coding, serialization/deserialization (SerDes), clock recovery, and modulation (e.g., PAM-3/PAM-5).
+*   **MDI (Medium Dependent Interface)**: The physical connection point (connectors and coupling circuits/hybrids) that bridges the PHY circuitry to the transmission line.
+*   **Media**: The underlying physical transmission channel, such as Unshielded Twisted Pair (UTP) or Shielded Twisted Pair (STP) cables.
+
+### Q2: If 100BASE-T1 uses 1 cable pair for 100 Mbps, and 1000BASE-T uses 4 cable pairs, shouldn't the speed of 1000BASE-T be $100\text{ Mbps} \times 4 = 400\text{ Mbps}$? Why is it $1000\text{ Mbps}$?
+
+**Answer:**
+The total throughput is not solely determined by multiplying the number of cable pairs. It is the product of three critical physical layer factors:
+
+$$\text{Total Throughput} = (\text{Symbol Rate}) \times (\text{Bits per Symbol}) \times (\text{Number of Parallel Channels})$$
+
+Here is the detailed breakdown comparing both standards:
+
+#### 1. 100BASE-T1 (Automotive Ethernet)
+*   **Pairs**: 1 Single Unshielded Twisted Pair (1-pair UTP).
+*   **Modulation**: PAM-3 (3 voltage levels: -1, 0, +1).
+*   **Bits per Symbol**: 3 bits are mapped to 2 symbols (3B2T encoding), so $1\text{ Symbol} = 1.5\text{ Bits}$.
+*   **Symbol Rate**: $66.66\text{ MBaud/s}$.
+*   **Throughput Calculation**: 
+    $$\text{Speed} = 66.66\text{ MBaud/s} \times 1.5\text{ bits/symbol} = 100\text{ Mbps}$$
+
+#### 2. 1000BASE-T (Gigabit Ethernet)
+*   **Pairs**: 4 Twisted Pairs operating simultaneously in Full-Duplex mode.
+*   **Modulation**: PAM-5 (5 voltage levels: -2, -1, 0, +1, +2).
+*   **Bits per Symbol**: 4 levels represent payload data ($2^2 = 4$), meaning $1\text{ Symbol} = 2\text{ Bits}$ (1 level is reserved for Trellis error correction).
+*   **Symbol Rate**: $125\text{ MBaud/s}$ per pair.
+*   **Per-Pair Throughput Calculation**:
+    $$\text{Speed}_{\text{pair}} = 125\text{ MBaud/s} \times 2\text{ bits/symbol} = 250\text{ Mbps/pair}$$
+*   **Total Throughput Calculation**:
+    $$\text{Total Speed} = 250\text{ Mbps/pair} \times 4\text{ pairs} = 1000\text{ Mbps } (1\text{ Gbps})$$
+
+#### Summary Comparison Table
+
+| Metric / Parameter | 100BASE-T1 | 1000BASE-T |
+| :--- | :--- | :--- |
+| **Cable Pairs** | 1 Pair (2 wires) | 4 Pairs (8 wires) |
+| **Modulation** | PAM-3 | PAM-5 |
+| **Bits per Symbol** | 1.5 bits/symbol | 2.0 bits/symbol |
+| **Symbol Rate (Baud Rate)** | 66.66 MBaud/s | 125 MBaud/s per pair |
+| **Speed per Pair** | 100 Mbps | 250 Mbps |
+| **Total Speed** | **100 Mbps** | **1000 Mbps (1 Gbps)** |
+
+**Conclusion:** 
+1000BASE-T reaches $1000\text{ Mbps}$ (1 Gbps) because it upgrades both the **Modulation Efficiency** (PAM-5 instead of PAM-3) and the **Baud Rate** ($125\text{ MBaud/s}$ instead of $66.66\text{ MBaud/s}$) alongside utilizing 4 parallel pairs.
 
 ## References
 
-- Vector Introduction to Automotive Ethernet
-https://certification.vector.com/mod/page/view.php?id=149#maincontent
+- Vector Introduction to Automotive Ethernet https://certification.vector.com/mod/page/view.php?id=149#maincontent
 
