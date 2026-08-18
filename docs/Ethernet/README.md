@@ -11,4 +11,7 @@ Status
 🔄 Second Pass In Progress
 * Introduction Completed
 * Physical-Layer Completed
-* Ethernet-MAC In Progress
+* Ethernet-MAC Completed
+* Ethernet-Frame Completed
+* IPv4 In Progress
+* IPv6 In Progress
