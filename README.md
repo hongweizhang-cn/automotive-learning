@@ -12,11 +12,11 @@ The goal is not only to record knowledge, but also to build a structured knowled
 
 - [x] Introduction
 - [x] Physical Layer
-- [ ] Ethernet MAC
-- [ ] Ethernet Frame
-- [ ] VLAN
-- [ ] IPv4
-- [ ] IPv6
+- [x] Ethernet MAC
+- [x] Ethernet Frame
+- [x] VLAN
+- [x] IPv4
+- [x] IPv6
 - [ ] TCP
 - [ ] UDP
 - [ ] SOME/IP

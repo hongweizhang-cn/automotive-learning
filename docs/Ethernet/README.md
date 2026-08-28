@@ -13,5 +13,6 @@ Status
 * Physical-Layer Completed
 * Ethernet-MAC Completed
 * Ethernet-Frame Completed
-* IPv4 In Progress
-* IPv6 In Progress
+* Internet Protocol Completed
+* UDP In Progress
+* TCP In Progress
