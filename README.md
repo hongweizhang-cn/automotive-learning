@@ -17,11 +17,11 @@ The goal is not only to record knowledge, but also to build a structured knowled
 - [x] VLAN
 - [x] IPv4
 - [x] IPv6
-- [ ] TCP
-- [ ] UDP
+- [x] TCP
+- [x] UDP
 - [ ] SOME/IP
-- [ ] DoIP
 - [ ] TSN
+- [ ] DoIP
 
 ---
 

@@ -14,5 +14,8 @@ Status
 * Ethernet-MAC Completed
 * Ethernet-Frame Completed
 * Internet Protocol Completed
-* UDP In Progress
-* TCP In Progress
+* UDP Completed
+* TCP Completed
+* SOMEIP In Progress
+* TSN In Progress
+* DoIP In Progress
