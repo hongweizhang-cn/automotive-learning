@@ -19,8 +19,8 @@ The goal is not only to record knowledge, but also to build a structured knowled
 - [x] IPv6
 - [x] TCP
 - [x] UDP
-- [ ] SOME/IP
-- [ ] TSN
+- [x] SOME/IP
+- [x] TSN
 - [ ] DoIP
 
 ---

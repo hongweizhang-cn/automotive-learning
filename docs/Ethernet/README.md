@@ -16,6 +16,6 @@ Status
 * Internet Protocol Completed
 * UDP Completed
 * TCP Completed
-* SOMEIP In Progress
-* TSN In Progress
+* SOMEIP Completed
+* TSN Completed
 * DoIP In Progress
