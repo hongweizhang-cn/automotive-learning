@@ -21,7 +21,7 @@ The goal is not only to record knowledge, but also to build a structured knowled
 - [x] UDP
 - [x] SOME/IP
 - [x] TSN
-- [ ] DoIP
+- [x] DoIP
 
 ---
 

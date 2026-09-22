@@ -18,4 +18,4 @@ Status
 * TCP Completed
 * SOMEIP Completed
 * TSN Completed
-* DoIP In Progress
+* DoIP Completed
