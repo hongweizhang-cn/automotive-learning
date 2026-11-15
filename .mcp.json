@@ -1,0 +1,11 @@
+{
+	"mcpServers": {
+		"automotive-log-analyzer": {
+			"type": "stdio",
+			"command": "D:\\github\\hongweizhang-cn\\automotive-learning\\.venv\\Scripts\\python.exe",
+			"args": [
+				"D:\\github\\hongweizhang-cn\\automotive-learning\\tools\\log_parser\\mcp_server.py"
+			]
+		}
+	}
+}
